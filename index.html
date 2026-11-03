@@ -138,6 +138,7 @@
 
         document.getElementById("result").textContent =
           "You said: " + transcript;
+        sendCommand(transcript);
       if (
   transcript.toLowerCase().includes("hello krv assistant") ||
   transcript.toLowerCase().includes("hello assistant")
