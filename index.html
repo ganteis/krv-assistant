@@ -139,7 +139,15 @@
 
         document.getElementById("result").textContent =
           "You said: " + transcript;
-
+      if (
+  transcript.toLowerCase().includes("hello krv assistant") ||
+  transcript.toLowerCase().includes("hello assistant")
+) {
+  speak("Hello bhai! I am KRV Assistant. How can I help you today?");
+      }
+        if (transcript.toLowerCase().includes("hello naomi")) {
+  speak("Hello Dear! Main Naomi hoon. How can I help you today?");
+        }
         document.getElementById("status").textContent =
           "Voice received successfully!";
 
