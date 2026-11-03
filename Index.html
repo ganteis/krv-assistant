@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRV Assistant</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #101114;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      background: #1c1d23;
+      padding: 30px 22px;
+      border-radius: 25px;
+      text-align: center;
+      border: 1px solid #30313a;
+    }
+
+    h1 {
+      color: #8b9cff;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    #status {
+      margin: 30px 0;
+      color: #bdbdc7;
+      font-size: 15px;
+    }
+
+    #micButton {
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      border: none;
+      background: #5865f2;
+      color: white;
+      font-size: 45px;
+      cursor: pointer;
+      box-shadow: 0 0 30px #5865f244;
+    }
+
+    #micButton:active {
+      transform: scale(0.95);
+      background: #3946c9;
+    }
+
+    #result {
+      margin-top: 25px;
+      padding: 18px;
+      background: #292a32;
+      border-radius: 14px;
+      min-height: 55px;
+      color: #eee;
+      overflow-wrap: anywhere;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>KRV Assistant</h1>
+
+    <p class="subtitle">Your Personal Voice Assistant</p>
+
+    <div id="status">Ready to listen</div>
+
+    <button id="micButton" onclick="startListening()">
+      🎙️
+    </button>
+
+    <div id="result">
+      Your voice command will appear here.
+    </div>
+
+    <div class="footer">
+      KRV OS | GANTEIS<br>
+      BUILD THE INTELLIGENT FUTURE
+    </div>
+
+  </div>
+
+  <script>
+    function startListening() {
+
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        document.getElementById("status").textContent =
+          "Voice recognition not supported. Please use Chrome.";
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+
+      recognition.lang = "en-IN";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      document.getElementById("status").textContent =
+        "Listening... Speak now";
+
+      recognition.onresult = function(event) {
+
+        const transcript =
+          event.results[0][0].transcript;
+
+        document.getElementById("result").textContent =
+          "You said: " + transcript;
+
+        document.getElementById("status").textContent =
+          "Voice received successfully!";
+
+      };
+
+      recognition.onerror = function(event) {
+
+        document.getElementById("status").textContent =
+          "Error: " + event.error;
+
+      };
+
+      recognition.onend = function() {
+
+        if (
+          document.getElementById("status").textContent ===
+          "Listening... Speak now"
+        ) {
+          document.getElementById("status").textContent =
+            "Listening stopped. Tap the mic again.";
+        }
+
+      };
+
+      recognition.start();
+    }
+  </script>
+
+</body>
+</html>
