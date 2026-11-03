@@ -187,6 +187,23 @@ function speak(text) {
   speech.pitch = 1;
   window.speechSynthesis.speak(speech);
 }
+    async function sendCommand(command) {
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbymKRIR7vFixJ-TsxeuyN-rJXc6qGESBJx1I4G_Wv9i6j6kLsrhZEjWGRkFjWSKqTA-/exec",
+    {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: JSON.stringify({
+        command: command
+      })
+    }
+  );
+
+  speak("Okay bhai, command sent.");
+    }
   </script>
 
 </body>
