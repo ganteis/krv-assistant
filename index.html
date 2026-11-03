@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,9 +147,12 @@
         if (transcript.toLowerCase().includes("hello naomi")) {
   speak("Hello Dear! Main Naomi hoon. How can I help you today?");
         }
-        if (transcript.toLowerCase().includes("hello K")) {
+        if (transcript.toLowerCase().includes("hello Ke")) {
   speak("Hello brother! Main Naomi. How can I help you today?");
     }
+    if (transcript.toLowerCase().includes("Hello Boss")) {
+  speak("Hello brother! Naomi Here. How can I help you today?");
+    }  
         document.getElementById("status").textContent =
           "Voice received successfully!";
 
